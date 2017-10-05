@@ -70,17 +70,24 @@ const getAllSubRedditPostsBeforeDateRecursive = async (
 
   const oldestPost = data[data.length - 1];
 
+  // If we reached posts older than submitted timestamp
   if (postOlderThan(oldestPost, timestamp)) {
+    // Remove posts older than submitted timestamp from final output
     return data.filter(post => {
       return !postOlderThan(post, timestamp);
     });
   } else {
+    // Set the pagination by requesting all posts older than the last one fetched
+    // This API guarantees that all the posts having the same timestamp as the last theoretical
+    // post will be fetched, even if that goes over the paginated post limit
     const beforeTimestamp = oldestPost.created_utc + 1;
+    // Call recursively
     const newData = await getAllSubRedditPostsBeforeDateRecursive(
       subReddit,
       timestamp,
       beforeTimestamp
     );
+    // Concat previous fetched posts with actual ones
     return [...data, ...newData];
   }
 };
