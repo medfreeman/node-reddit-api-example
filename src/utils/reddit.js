@@ -45,6 +45,13 @@ const getSubRedditPostsBeforeDatePaginated = async (
   return response;
 };
 
+const postOlderThan = (post, timestamp) => {
+  const postTimestamp = post.created_utc
+    ? timestampFromRedditString(post.created_utc)
+    : 0;
+  return postTimestamp < timestamp;
+};
+
 const getAllSubRedditPostsBeforeDateRecursive = async (
   subReddit,
   timestamp,
@@ -62,13 +69,11 @@ const getAllSubRedditPostsBeforeDateRecursive = async (
   }
 
   const oldestPost = data[data.length - 1];
-  const postTimestamp = oldestPost.created_utc
-    ? timestampFromRedditString(oldestPost.created_utc)
-    : 0;
-  const dateReached = postTimestamp < timestamp ? true : false;
 
-  if (dateReached) {
-    return data;
+  if (postOlderThan(oldestPost, timestamp)) {
+    return data.filter(post => {
+      return !postOlderThan(post, timestamp);
+    });
   } else {
     const beforeTimestamp = oldestPost.created_utc + 1;
     const newData = await getAllSubRedditPostsBeforeDateRecursive(
@@ -85,15 +90,8 @@ const getAllSubRedditPostsNewerThan = async (subReddit, timestamp) => {
     subReddit,
     timestamp
   );
-  const filteredPosts = posts.filter(post => {
-    const postTimestamp = post.created_utc
-      ? timestampFromRedditString(post.created_utc)
-      : 0;
-    const dateReached = postTimestamp < timestamp ? true : false;
-    return !dateReached;
-  });
 
-  return filteredPosts;
+  return posts;
 };
 
 export { getAllSubRedditPostsNewerThan };
