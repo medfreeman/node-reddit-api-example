@@ -5,5 +5,5 @@ Extract data fields from reddit topics in node.js
 git clone https://github.com/medfreeman/node-reddit-api-example.git
 cd node-reddit-api-example
 yarn
-node dist/index.js
+./bin/index.js
 ```
