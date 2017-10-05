@@ -76,7 +76,7 @@ const getAllSubRedditPostsBeforeDateRecursive = async (
       timestamp,
       beforeTimestamp
     );
-    return Array.concat(data, newData);
+    return [...data, ...newData];
   }
 };
 
