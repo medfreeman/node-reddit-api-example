@@ -4,8 +4,12 @@
   "version": "0.1.0",
   "description": "Extract data fields from subreddit posts in node.js",
   "main": "dist/index.js",
+  "bin" : {
+    "reddit-api" : "./bin/index.js"
+  },
   "files": [
-    "dist"
+    "dist",
+    "bin"
   ],
   "browser": "dist/browser.min.js",
   "scripts": {
