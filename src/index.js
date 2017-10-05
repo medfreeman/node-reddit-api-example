@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
 
+import { prettify } from "./utils/object";
 import { timestampFromDateString } from "./utils/date";
 import { getAllSubRedditPostsNewerThan } from "./utils/reddit";
-
-const prettify = obj => JSON.stringify(obj, null, 2);
 
 const subReddit = "programming";
 const dateString = "September 10th 2017";
