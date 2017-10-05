@@ -16,13 +16,13 @@
     "#<git hooks>": "handled by husky",
     "precommit": "lint-staged",
     "#</git hooks>": "handled by husky",
-    "build": "yarn build-server && yarn build-browser",
+    "build": "npm run build-server && npm run build-browser",
     "build-server": "babel -d ./dist ./src",
     "watch": "babel -w  -d ./dist ./src",
-    "build-browser": "yarn build-browserify && yarn build-mangle",
+    "build-browser": "npm run build-browserify && npm run build-mangle",
     "build-browserify": "browserify ./src/index.js --bare -t babelify -s redditApi > ./dist/browser.js",
     "build-mangle": "esmangle ./dist/browser.js > ./dist/browser.min.js",
-    "prepublish": "yarn build-server",
+    "prepublish": "npm run build-server",
     "lint": "eslint --fix ./src"
   },
   "repository": {
