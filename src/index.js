@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import { timestampFromDateString } from "./utils/date";
 import { getAllSubRedditPostsNewerThan } from "./utils/reddit";
 
