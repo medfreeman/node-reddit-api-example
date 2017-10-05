@@ -4,8 +4,22 @@
   "version": "0.1.0",
   "description": "Extract data fields from reddit topics in node.js",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "browser": "dist/browser.min.js",
   "scripts": {
-    "test": "test"
+    "#<git hooks>": "handled by husky",
+    "precommit": "lint-staged",
+    "#</git hooks>": "handled by husky",
+    "build": "yarn build-server && yarn build-browser",
+    "build-server": "babel -d ./dist ./src",
+    "watch": "babel -w  -d ./dist ./src",
+    "build-browser": "yarn build-browserify && yarn build-mangle",
+    "build-browserify": "browserify ./src/index.js --bare -t babelify -s redditApi > ./dist/browser.js",
+    "build-mangle": "esmangle ./dist/browser.js > ./dist/browser.min.js",
+    "prepublish": "yarn build",
+    "lint": "eslint --fix ./src"
   },
   "repository": {
     "type": "git",
@@ -23,5 +37,61 @@
   "bugs": {
     "url": "https://github.com/medfreeman/node-reddit-api-example/issues"
   },
-  "homepage": "https://github.com/medfreeman/node-reddit-api-example#readme"
+  "homepage": "https://github.com/medfreeman/node-reddit-api-example#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "eslint": "^4.8.0",
+    "eslint-config-i-am-meticulous": "^7.0.1",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "esmangle": "^1.0.1",
+    "git-exec-and-restage": "^1.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
+    "prettier": "^1.7.4"
+  },
+  "lint-staged": {
+    "*.js": [
+      "git-exec-and-restage prettier --write --"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "babel-preset-env"
+    ],
+    "plugins": [
+      "transform-object-rest-spread",
+      "transform-async-to-generator"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 8,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "babel"
+    ],
+    "extends": [
+      "eslint-config-i-am-meticulous",
+      "eslint-config-prettier"
+    ],
+    "env": {
+      "node": true,
+      "es6": true
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "parser": "babylon"
+  }
 }
