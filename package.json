@@ -18,7 +18,7 @@
     "build-browser": "yarn build-browserify && yarn build-mangle",
     "build-browserify": "browserify ./src/index.js --bare -t babelify -s redditApi > ./dist/browser.js",
     "build-mangle": "esmangle ./dist/browser.js > ./dist/browser.min.js",
-    "prepublish": "yarn build",
+    "prepublish": "yarn build-server",
     "lint": "eslint --fix ./src"
   },
   "repository": {
