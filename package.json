@@ -1,0 +1,27 @@
+{
+  "name": "reddit-api-example",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Extract data fields from reddit topics in node.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/medfreeman/node-reddit-api-example.git"
+  },
+  "keywords": [
+    "node",
+    "reddit",
+    "api",
+    "consumer",
+    "pagination"
+  ],
+  "author": "Mehdi Lahlou <mlahlou@protonmail.ch>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/medfreeman/node-reddit-api-example/issues"
+  },
+  "homepage": "https://github.com/medfreeman/node-reddit-api-example#readme"
+}
