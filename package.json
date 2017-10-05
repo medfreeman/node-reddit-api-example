@@ -105,5 +105,8 @@
     "chrono-node": "^1.3.5",
     "universal-url": "^1.0.0",
     "url-join": "^2.0.2"
+  },
+  "engines" : {
+    "node" : ">=6.0"
   }
 }
