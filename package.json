@@ -2,7 +2,7 @@
   "name": "reddit-api-example",
   "private": true,
   "version": "0.1.0",
-  "description": "Extract data fields from reddit topics in node.js",
+  "description": "Extract data fields from subreddit posts in node.js",
   "main": "dist/index.js",
   "files": [
     "dist"
